@@ -218,6 +218,7 @@ Two different documentations should be published:
     And the footer could look like this:  
     One could find useful information in:
       - the [**documentation about how to integrate Swagger in a .NET project**](https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-7.0&tabs=visual-studio).  
+      - the [**documentation of Swashbuckle.AspNetCore**](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) and especially the **Cli** part.  
 
 ## Authors
 Marc Chevaldonné
