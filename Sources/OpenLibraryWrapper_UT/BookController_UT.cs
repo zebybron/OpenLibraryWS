@@ -14,7 +14,7 @@ namespace OpenLibraryWrapper_UT;
 public class BookController_UT
 {
     private readonly BookController controller;
-    private readonly IDtoManager dtoManager = new OpenLibClientAPI();
+    private readonly IDtoManager dtoManager = new Stub();
 
     public BookController_UT()
     {
@@ -75,6 +75,6 @@ public class BookController_UT
         long nbBooks = booksTupple.Item1;
         var books = booksTupple.Item2;
 
-        Assert.Equal(5, books.Count());
+        Assert.Equal(2, books.Count());
     }
 }
