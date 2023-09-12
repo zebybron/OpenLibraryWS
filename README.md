@@ -219,6 +219,16 @@ Two different documentations should be published:
     One could find useful information in:
       - the [**documentation about how to integrate Swagger in a .NET project**](https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-7.0&tabs=visual-studio).  
       - the [**documentation of Swashbuckle.AspNetCore**](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) and especially the **Cli** part.  
+5. **building the web api docker image** job:
+The Dockerfile has not been prepared. Its entry point should be ```ENTRYPOINT ["dotnet", "OpenLibraryWrapper.dll"]```.  
+6. **deploying containers using the web api**:
+The Web api is dependent on a service represented by the interface ```IDtoManager```. Three versions of this service have been prepared:
+- the stub (injected by default),
+- the wrapping of the OpenLibrary web api,
+- the use of a database (see next section).
+You should allow the deployment of the previous web api image but with different dependency injections. The choice should be made by entering a particular environment variable in the job. This variable should then be read in the C# code of the web api in order to inject the corresponding service. 
+7. **deploying the database and the web api consuming it**:
+The third versions of the web api container should consume the database. This one should first be deployed. Then, modify the web api source to retrieve the connexion string and connect your web api container to the database.  
 
 ## Authors
 Marc Chevaldonné
