@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenLibraryWrapper\OpenLibraryWrapper.csproj" />
-    <ProjectReference Include="..\StubbedDTO\StubbedDTO.csproj" />
-    <ProjectReference Include="..\LibraryDTO\LibraryDTO.csproj" />
-    <ProjectReference Include="..\DtoAbstractLayer\DtoAbstractLayer.csproj" />
-    <ProjectReference Include="..\OpenLibraryClient\OpenLibraryClient.csproj" />
+    <ProjectReference Include="..\..\StubbedDTO\StubbedDTO.csproj" />
+    <ProjectReference Include="..\..\DtoAbstractLayer\DtoAbstractLayer.csproj" />
+    <ProjectReference Include="..\..\LibraryDTO\LibraryDTO.csproj" />
+    <ProjectReference Include="..\..\OpenLibraryClient\OpenLibraryClient.csproj" />
+    <ProjectReference Include="..\..\OpenLibraryWrapper\OpenLibraryWrapper.csproj" />
   </ItemGroup>
 </Project>

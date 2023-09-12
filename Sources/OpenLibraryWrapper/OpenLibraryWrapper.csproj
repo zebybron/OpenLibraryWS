@@ -31,6 +31,9 @@
     <ProjectReference Include="..\OpenLibraryClient\OpenLibraryClient.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\MyLibraryManager\MyLibraryManager.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Program.cs">

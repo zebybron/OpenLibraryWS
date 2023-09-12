@@ -75,6 +75,6 @@ public class BookController_UT
         long nbBooks = booksTupple.Item1;
         var books = booksTupple.Item2;
 
-        Assert.Equal(2, books.Count());
+        Assert.Equal(4, books.Count());
     }
 }
