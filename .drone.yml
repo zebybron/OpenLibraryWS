@@ -17,7 +17,7 @@ steps:
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:7.0
     commands:
-      - cd Sources/OpenLibraryWrapper_UT
+      - cd Sources/Tests/OpenLibraryWrapper_UT
       - dotnet test
     depends_on: [build]
 
