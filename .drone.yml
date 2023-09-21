@@ -51,11 +51,9 @@ steps:
     depends_on: [build,tests]
 
   - name: hadolint
-    image: hadolint/hadolint
+    image: hadolint/hadolint:latest
     commands:
       - hadolint Sources/Dockerfile
-      - hadolint --ignore DL3003 --ignore DL3006 Sources/Dockerfile
-      - hadolint --trusted-registry my-company.com:500 Sources/Dockerfile
     depends_on: [ build ]
 
 
