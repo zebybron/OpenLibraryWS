@@ -10,18 +10,19 @@ using StubbedDTO;
 var builder = WebApplication.CreateBuilder(args);
 
 var dbDatabase = Environment.GetEnvironmentVariable("DB_DATABASE");
+
 if ( dbDatabase == "stub")
 {
-    builder.Services.AddSingleton<IDtoManager, Stub>();
+builder.Services.AddSingleton<IDtoManager, Stub>();
 }
- else if (dbDatabase == "api")
+if (dbDatabase == "api")
 {
 
-    builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
+builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
 }
 else
 {
-    builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
+builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
 }
 
 
