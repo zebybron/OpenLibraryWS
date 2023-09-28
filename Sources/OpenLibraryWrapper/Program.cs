@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.Metrics;
+using System.Reflection;
 using DtoAbstractLayer;
 using LibraryDTO;
 using Microsoft.OpenApi.Models;
@@ -11,23 +12,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 var dbDatabase = Environment.GetEnvironmentVariable("DB_DATABASE");
 
-/*
-if ( dbDatabase == "stub")
-{
-    builder.Services.AddSingleton<IDtoManager, Stub>();
-}
-if (dbDatabase == "api")
-{
 
-    builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
-    //builder.Services.AddSingleton<IDtoManager, Stub>();
-}
-else
+switch (dbDatabase)
 {
-    //builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
-}*/
-builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
-
+    case "stub":
+        builder.Services.AddSingleton<IDtoManager, Stub>();
+        break;
+    case "api":
+        builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
+        break;
+    case "bdd":
+        builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
+        break;
+    default:
+        Console.WriteLine($"Erreur {dbDatabase}");
+        break;
+}
 
 // Add services to the container.
 builder.Services.AddControllers();
