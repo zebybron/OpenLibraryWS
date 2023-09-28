@@ -30,7 +30,7 @@ steps:
         path: /docs
     commands:
      - /entrypoint.sh
-    depends_on: [buildWS,testsWS]
+    depends_on: [build-WS,tests-WS]
 
   - name: code-inspection-WS
     image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet7
