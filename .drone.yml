@@ -7,22 +7,22 @@ trigger:
     - push
 
 steps:
-  - name: build
+  - name: build-WS
     image: mcr.microsoft.com/dotnet/sdk:7.0
     commands:
       - cd Sources/
       - dotnet restore OpenLibraryWS_Wrapper.sln
       - dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore
 
-  - name: tests
+  - name: tests-WS
     image: mcr.microsoft.com/dotnet/sdk:7.0
     commands:
       - cd Sources/Tests/OpenLibraryWrapper_UT
       - dotnet test
-    depends_on: [build]
+    depends_on: [build-WS]
 
 
-  - name: generate-and-deploy-docs
+  - name: generate-and-deploy-docs-WS
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
     failure: ignore
     volumes:
@@ -30,9 +30,9 @@ steps:
         path: /docs
     commands:
      - /entrypoint.sh
-    depends_on: [build,tests]
+    depends_on: [buildWS,testsWS]
 
-  - name: code-inspection
+  - name: code-inspection-WS
     image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet7
     secrets: [ SECRET_SONAR_LOGIN]
     settings:
@@ -48,17 +48,17 @@ steps:
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
       - dotnet publish OpenLibraryWS_Wrapper.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
-    depends_on: [build,tests]
+    depends_on: [build-WS,tests-WS]
 
-  - name: hadolint
+  - name: hadolint-WS
     image: hadolint/hadolint:latest
     commands:
       - hadolint Sources/Dockerfile
-    depends_on: [ build ]
+    depends_on: [ build-WS ]
 
 
     # docker image build
-  - name: docker-build-and-push
+  - name: docker-build-and-push-WS
     image: plugins/docker
     settings:
        dockerfile: Sources/Dockerfile
@@ -69,7 +69,7 @@ steps:
          from_secret: SECRET_REGISTRY_USERNAME
        password:
          from_secret: SECRET_REGISTRY_PASSWORD
-    depends_on: [ hadolint ]
+    depends_on: [ hadolint-WS ]
 
       # container deployment
   - name: deploy-container
@@ -79,25 +79,25 @@ steps:
         CONTAINERNAME: enzodotnet
         COMMAND: create
         OVERWRITE: true
-    depends_on: [ docker-build-and-push ]
+    depends_on: [ docker-build-and-push-WS ]
 
   # database container deployment
-  - name: deploy-container-mysql
-    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
-    environment:
-        IMAGENAME: mariadb:10
-        CONTAINERNAME: mysql
-        COMMAND: create
-        OVERWRITE: true
-        PRIVATE: true
-        CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
-          from_secret: db_root_password
-        CODEFIRST_CLIENTDRONE_ENV_MARIADB_DATABASE:
-          from_secret: db_database
-        CODEFIRST_CLIENTDRONE_ENV_MARIADB_USER:
-          from_secret: db_user
-        CODEFIRST_CLIENTDRONE_ENV_MARIADB_PASSWORD:
-          from_secret: db_password
+  #- name: deploy-container-mysql
+  #  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+  #  environment:
+        # IMAGENAME: mariadb:10
+        # CONTAINERNAME: mysql
+        # COMMAND: create
+        # OVERWRITE: true
+        # PRIVATE: true
+        # CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
+        #   from_secret: db_root_password
+        # CODEFIRST_CLIENTDRONE_ENV_MARIADB_DATABASE:
+        #   from_secret: db_database
+        # CODEFIRST_CLIENTDRONE_ENV_MARIADB_USER:
+        #   from_secret: db_user
+        # CODEFIRST_CLIENTDRONE_ENV_MARIADB_PASSWORD:
+        #   from_secret: db_password
 
   #- name: gen-swagger
    # image: mcr.microsoft.com/dotnet/sdk:7.0
