@@ -14,11 +14,15 @@ if ( dbDatabase.Equals("stub"))
 {
     builder.Services.AddSingleton<IDtoManager, Stub>();
 }
- else
+ else if (dbDatabase.Equals("api"))
+{
+
+    builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
+}
+else
 {
     builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
 }
-
 
 
 // Add services to the container.
