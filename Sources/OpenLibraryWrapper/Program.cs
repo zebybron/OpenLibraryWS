@@ -24,7 +24,7 @@ switch (dbDatabase)
         break;
     case "bdd":
        // builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
-        builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( x => new MyLibraryMgr(chaine));
+        builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( (x) => new MyLibraryMgr(chaine));
         break;
     default:
         Console.WriteLine($"Erreur {dbDatabase}");
