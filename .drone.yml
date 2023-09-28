@@ -11,7 +11,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:7.0
     environment:
         CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
-           api
+           bdd
     commands:
       - cd Sources/
       - dotnet restore OpenLibraryWS_Wrapper.sln
