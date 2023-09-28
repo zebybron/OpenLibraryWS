@@ -11,7 +11,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:7.0
     environment:
         CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
-           api
+           x
     commands:
       - cd Sources/
       - dotnet restore OpenLibraryWS_Wrapper.sln
@@ -23,6 +23,7 @@ steps:
       - cd Sources/Tests/OpenLibraryWrapper_UT
       - dotnet test
     depends_on: [build-WS]
+
 
 
   # - name: generate-and-deploy-docs-WS
