@@ -10,7 +10,7 @@ steps:
   - name: build-WS
     image: mcr.microsoft.com/dotnet/sdk:7.0
     environment:
-        CODEFIRST_CLIENTDRONE_ENV_DATA:
+        CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
            stub
     commands:
       - cd Sources/
