@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var dbDatabase = Environment.GetEnvironmentVariable("DB_DATABASE");
 
+/*
 if ( dbDatabase == "stub")
 {
     builder.Services.AddSingleton<IDtoManager, Stub>();
@@ -24,7 +25,8 @@ if (dbDatabase == "api")
 else
 {
     //builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
-}
+}*/
+builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
 
 
 // Add services to the container.
