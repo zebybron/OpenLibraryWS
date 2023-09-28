@@ -53,7 +53,7 @@ steps:
   - name: hadolint-WS
     image: ghcr.io/hadolint/hadolint:latest-alpine
     commands:
-      - hadolint Dockerfile
+      - hadolint Sources/Dockerfile
     depends_on: [ build-WS ]
 
 
