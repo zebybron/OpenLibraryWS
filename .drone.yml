@@ -51,7 +51,7 @@ steps:
     depends_on: [build-WS,tests-WS]
 
   - name: hadolint-WS
-    image: hadolint/hadolint:latest
+    image: ghcr.io/hadolint/hadolint:latest-alpine
     commands:
       - hadolint Sources/Dockerfile
     depends_on: [ build-WS ]
