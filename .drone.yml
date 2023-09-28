@@ -22,33 +22,33 @@ steps:
     depends_on: [build-WS]
 
 
-  - name: generate-and-deploy-docs-WS
-    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
-    failure: ignore
-    volumes:
-      - name: docs
-        path: /docs
-    commands:
-     - /entrypoint.sh
-    depends_on: [build-WS,tests-WS]
+  # - name: generate-and-deploy-docs-WS
+  #   image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-docdeployer
+  #   failure: ignore
+  #   volumes:
+  #     - name: docs
+  #       path: /docs
+  #   commands:
+  #    - /entrypoint.sh
+  #   depends_on: [build-WS,tests-WS]
 
-  - name: code-inspection-WS
-    image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet7
-    secrets: [ SECRET_SONAR_LOGIN]
-    settings:
-      sonar_host: https://codefirst.iut.uca.fr/sonar/
-      sonar_token:
-        from_secret: SECRET_SONAR_LOGIN
-    commands:
-      - cd Sources/
-      - dotnet restore OpenLibraryWS_Wrapper.sln
-      - dotnet sonarscanner begin /k:WS1_Enzo_Jolys /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
-      - dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore
-      - dotnet test OpenLibraryWS_Wrapper.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
-      - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
-      - dotnet publish OpenLibraryWS_Wrapper.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
-      - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
-    depends_on: [build-WS,tests-WS]
+  # - name: code-inspection-WS
+  #   image: hub.codefirst.iut.uca.fr/marc.chevaldonne/codefirst-dronesonarplugin-dotnet7
+  #   secrets: [ SECRET_SONAR_LOGIN]
+  #   settings:
+  #     sonar_host: https://codefirst.iut.uca.fr/sonar/
+  #     sonar_token:
+  #       from_secret: SECRET_SONAR_LOGIN
+  #   commands:
+  #     - cd Sources/
+  #     - dotnet restore OpenLibraryWS_Wrapper.sln
+  #     - dotnet sonarscanner begin /k:WS1_Enzo_Jolys /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+  #     - dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore
+  #     - dotnet test OpenLibraryWS_Wrapper.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
+  #     - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
+  #     - dotnet publish OpenLibraryWS_Wrapper.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+  #     - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
+  #   depends_on: [build-WS,tests-WS]
 
   - name: hadolint-WS
     image: ghcr.io/hadolint/hadolint:latest-alpine
