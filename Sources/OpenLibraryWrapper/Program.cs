@@ -11,6 +11,7 @@ using StubbedDTO;
 var builder = WebApplication.CreateBuilder(args);
 
 var dbDatabase = Environment.GetEnvironmentVariable("DB_DATABASE");
+string chaine = "server=enzojolys-mysql;port=3306;user=toto;password=1234;database=mysql";
 
 
 switch (dbDatabase)
@@ -23,8 +24,7 @@ switch (dbDatabase)
         break;
     case "bdd":
        // builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
-        builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( x => new MyLibraryMgr("server=enzojolys-mysql;port=3306;user=toto;password=1234;database=mysql"));
-
+        builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( x => new MyLibraryMgr(chaine));
         break;
     default:
         Console.WriteLine($"Erreur {dbDatabase}");
