@@ -18,12 +18,12 @@ if ( dbDatabase == "stub")
 if (dbDatabase == "api")
 {
 
-    //builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
-    builder.Services.AddSingleton<IDtoManager, Stub>();
+    builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
+    //builder.Services.AddSingleton<IDtoManager, Stub>();
 }
 else
 {
-    builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
+    //builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
 }
 
 
