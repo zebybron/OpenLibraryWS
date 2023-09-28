@@ -8,9 +8,11 @@ using StubbedDTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var dbDatabase = System.Environment.GetEnvironmentVariable("DB_DATABASE", System.EnvironmentVariableTarget.Process);
+
 // Add services to the container.
 
-builder.Services.AddSingleton<IDtoManager, Stub>();
+builder.Services.AddSingleton<IDtoManager, dbDatabase>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
