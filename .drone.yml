@@ -83,6 +83,14 @@ steps:
         CONTAINERNAME: enzodotnet
         COMMAND: create
         OVERWRITE: true
+        CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
+           from_secret: db_root_password
+         CODEFIRST_CLIENTDRONE_ENV_MARIADB_DATABASE:
+           from_secret: db_database
+         CODEFIRST_CLIENTDRONE_ENV_MARIADB_USER:
+           from_secret: db_user
+         CODEFIRST_CLIENTDRONE_ENV_MARIADB_PASSWORD:
+           from_secret: db_password
     depends_on: [ docker-build-and-push-WS ]
 
   # database container deployment
