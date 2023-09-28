@@ -88,7 +88,7 @@ steps:
         IMAGENAME: mariadb:10
         CONTAINERNAME: mysql
         COMMAND: create
-        # OVERWRITE: false
+        OVERWRITE: true
         PRIVATE: true
         CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
           from_secret: db_root_password
