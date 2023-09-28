@@ -23,7 +23,7 @@ switch (dbDatabase)
         break;
     case "bdd":
        // builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
-        builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( (x) => new MyLibraryMgr("server=enzojolys-mariadb;port=3306;user=toto;password=1234;database=mysql;"));
+        builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( x => new MyLibraryMgr("server=enzojolys-mysql;port=3306;user=toto;password=1234;database=mysql"));
 
         break;
     default:
