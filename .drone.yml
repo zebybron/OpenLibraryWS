@@ -80,8 +80,8 @@ steps:
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
         IMAGENAME: hub.codefirst.iut.uca.fr/enzo.jolys/openlibraryws_wrapper:latest
-        CONTAINERNAME: mysql
-        COMMAND: enzo.jolys
+        CONTAINERNAME: enzo.jolys
+        COMMAND: create
         OVERWRITE: true
         CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
            from_secret: db_root_password
