@@ -27,7 +27,7 @@ switch (dbDatabase)
         builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( (x) => new MyLibraryMgr(chaine));
         break;
     default:
-        Console.WriteLine($"Erreur {dbDatabase}");
+        Console.WriteLine($"Erreur {dbDatabase} database ");
         break;
 }
 
