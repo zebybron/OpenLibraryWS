@@ -80,7 +80,7 @@ steps:
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
         IMAGENAME: hub.codefirst.iut.uca.fr/enzo.jolys/openlibraryws_wrapper:latest
-        CONTAINERNAME: enzo.jolys
+        CONTAINERNAME: WS_DOTNET
         COMMAND: create
         OVERWRITE: true
         CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
