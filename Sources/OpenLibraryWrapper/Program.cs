@@ -18,13 +18,16 @@ switch (dbDatabase)
 {
     case "stub":
         builder.Services.AddSingleton<IDtoManager, Stub>();
+        Console.WriteLine($"Erreur {dbDatabase} database-stub ");
         break;
     case "api":
         builder.Services.AddSingleton<IDtoManager, OpenLibClientAPI>();
+        Console.WriteLine($"Erreur {dbDatabase} database-api ");
         break;
     case "bdd":
        // builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>();
         builder.Services.AddSingleton<IDtoManager, MyLibraryMgr>( (x) => new MyLibraryMgr(chaine));
+        Console.WriteLine($"Erreur {dbDatabase} database-BDD ");
         break;
     default:
         Console.WriteLine($"Erreur {dbDatabase} database ");
