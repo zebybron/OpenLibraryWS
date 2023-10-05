@@ -11,7 +11,7 @@ using StubbedDTO;
 var builder = WebApplication.CreateBuilder(args);
 
 var dbDatabase = Environment.GetEnvironmentVariable("DB_DATABASE");
-string chaine = "server=enzojolys-mysql;port=3306;user=toto;password=1234;database=mysql";
+string chaine = "server=enzojolys-mysql;port=3306;user=totouser;password=1234;database=toto";
 
 
 switch (dbDatabase)
