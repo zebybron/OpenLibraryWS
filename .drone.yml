@@ -9,9 +9,6 @@ trigger:
 steps:
   - name: build-WS
     image: mcr.microsoft.com/dotnet/sdk:7.0
-    environment:
-        CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
-           bdd
     commands:
       - cd Sources/
       - dotnet restore OpenLibraryWS_Wrapper.sln
@@ -73,7 +70,7 @@ steps:
          from_secret: SECRET_REGISTRY_USERNAME
        password:
          from_secret: SECRET_REGISTRY_PASSWORD
-    depends_on: [ hadolint-WS ]
+    depends_on: [ deploy-container-mysql ]
 
       # container deployment
   - name: deploy-container
@@ -83,6 +80,8 @@ steps:
         CONTAINERNAME: WS_DOTNET
         COMMAND: create
         OVERWRITE: true
+        CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
+           bdd
         CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
            from_secret: db_root_password
         CODEFIRST_CLIENTDRONE_ENV_MARIADB_DATABASE:
@@ -110,7 +109,7 @@ steps:
            from_secret: db_user
          CODEFIRST_CLIENTDRONE_ENV_MARIADB_PASSWORD:
            from_secret: db_password
-    depends_on: [ docker-build-and-push-WS ]
+    depends_on: [ hadolint-WS ]
 
   #- name: gen-swagger
    # image: mcr.microsoft.com/dotnet/sdk:7.0
