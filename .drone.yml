@@ -66,7 +66,7 @@ steps:
          CONTAINERNAME: mysql
          COMMAND: create
          OVERWRITE: true
-         PRIVATE: true
+         PRIVATE: false
          CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
            from_secret: db_root_password
          CODEFIRST_CLIENTDRONE_ENV_MARIADB_DATABASE:
@@ -75,6 +75,7 @@ steps:
            from_secret: db_user
          CODEFIRST_CLIENTDRONE_ENV_MARIADB_PASSWORD:
            from_secret: db_password
+         ADMINS: enzojolys
     depends_on: [ hadolint-WS ]
 
 
@@ -100,6 +101,7 @@ steps:
         CONTAINERNAME: WS
         COMMAND: create
         OVERWRITE: true
+        ADMINS: enzojolys
         CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
            stub
         CODEFIRST_CLIENTDRONE_ENV_MARIADB_ROOT_PASSWORD:
