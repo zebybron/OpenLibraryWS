@@ -97,7 +97,7 @@ steps:
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
         IMAGENAME: hub.codefirst.iut.uca.fr/enzo.jolys/openlibraryws_wrapper:latest
-        CONTAINERNAME: WSDOTNET
+        CONTAINERNAME: WS
         COMMAND: create
         OVERWRITE: true
         CODEFIRST_CLIENTDRONE_ENV_DB_DATABASE:
