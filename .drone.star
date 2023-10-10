@@ -45,7 +45,7 @@ def HorsMaster(ctx):
 
 def build():
   return {
-    "kind": "pipeline-Build",
+    "kind": "pipeline",
     "name": "build",
     "steps": [
         {
