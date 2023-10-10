@@ -21,11 +21,11 @@ def main(ctx):
   listStep.add(Build())
 
 
-  return [ 
+  return {
     "kind": "pipeline",
     "name": "WS",
     "steps": "listStep"
-  ]
+  }
 
 
 
