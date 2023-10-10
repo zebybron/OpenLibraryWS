@@ -1,3 +1,24 @@
+def Build():
+  return {
+    "kind": "pipeline",
+    "name": "build",
+    "steps": [
+        {
+          "name": "build",
+          "image": "mcr.microsoft.com/dotnet/sdk:7.0",
+          "commands": [ "cd Sources/" , "dotnet restore OpenLibraryWS_Wrapper.sln" , "dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore" ]
+        }]
+  }
+
+def Tests():
+  return {
+          "name": "tests",
+          "image": "mcr.microsoft.com/dotnet/sdk:7.0",
+          "commands": [ "cd Sources/Tests/OpenLibraryWrapper_UT", "dotnet test" ],
+          "depends_on": [ "build" ]
+        }
+
+
 def main(ctx):
   if ctx.build.branch == "master" :
     return CI()
@@ -39,21 +60,12 @@ def CD():
 
 
 def HorsMaster(ctx):
-  if "[sonar]" in ctx.build.message:
-    tmp = build() 
-    return tmp
+  if "[sonar]" or "[ci_all]" in ctx.build.message:
+    varBuild = Build() 
+  if "[doxygen]" or "[swagger]" in ctx.build.message:
+    varTest = Tests()
+  
+  return [ varBuild , varTest ]
   
   
-
-def build():
-  return {
-    "kind": "pipeline",
-    "name": "build",
-    "steps": [
-        {
-          "name": "build",
-          "image": "mcr.microsoft.com/dotnet/sdk:7.0",
-          "commands": [ "cd Sources/" , "dotnet restore OpenLibraryWS_Wrapper.sln" , "dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore" ]
-        }]
-  }
 
