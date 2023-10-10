@@ -1,12 +1,13 @@
 def main(ctx):
   return [
-    pipeline()
+    if ctx.build.branch == "master" :
+      CI()
   ]
 
-def pipeline():
+def CI():
   return {
     "kind": "pipeline",
-    "name": "build-WS",
+    "name": "CI",
     "steps": [
         {
           "name": "build",
@@ -19,7 +20,6 @@ def pipeline():
           "image": "mcr.microsoft.com/dotnet/sdk:7.0",
           "commands": [ "cd Sources/Tests/OpenLibraryWrapper_UT", "dotnet test" ],
           "depends_on": [ "build" ]
-          
         }
         
         ]
