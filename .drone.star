@@ -21,6 +21,5 @@ def CI():
           "commands": [ "cd Sources/Tests/OpenLibraryWrapper_UT", "dotnet test" ],
           "depends_on": [ "build" ]
         }
-        
         ]
   }
