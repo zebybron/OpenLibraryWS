@@ -12,8 +12,7 @@ def pipeline():
             {
                 "name": "build",
                 "image": "mcr.microsoft.com/dotnet/sdk:7.0",
-                "commands": [
-                "cd Sources/" , "dotnet restore OpenLibraryWS_Wrapper.sln" , "dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore" ]
+                "commands": [ "cd Sources/" , "dotnet restore OpenLibraryWS_Wrapper.sln" , "dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore" ]
             }
 
             ]
