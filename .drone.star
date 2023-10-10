@@ -2,7 +2,7 @@ def main(ctx):
   if ctx.build.branch == "master" :
       return CI()
   else : 
-      return []
+      return CD()
 
 def CI():
   return {
@@ -20,6 +20,18 @@ def CI():
           "image": "mcr.microsoft.com/dotnet/sdk:7.0",
           "commands": [ "cd Sources/Tests/OpenLibraryWrapper_UT", "dotnet test" ],
           "depends_on": [ "build" ]
-        }
-        ]
+        }]
+  }
+
+
+def CD():
+  return {
+    "kind": "pipeline",
+    "name": "CD",
+    "steps": [
+        {
+          "name": "build",
+          "image": "mcr.microsoft.com/dotnet/sdk:7.0",
+          "commands": [ "cd Sources/" , "dotnet restore OpenLibraryWS_Wrapper.sln" , "dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore" ]
+        }]
   }
