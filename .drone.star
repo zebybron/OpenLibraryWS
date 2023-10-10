@@ -1,7 +1,7 @@
 def Build():
   return {
     "kind": "pipeline",
-    "name": "build",
+    "name": "all",
     "steps": [
         {
           "name": "build",
@@ -13,7 +13,7 @@ def Build():
 def Tests():
   return {
           "kind": "pipeline",
-          "name": "tests",
+          "name": "all",
           "image": "mcr.microsoft.com/dotnet/sdk:7.0",
           "commands": [ "cd Sources/Tests/OpenLibraryWrapper_UT", "dotnet test" ],
           "depends_on": [ "build" ]
