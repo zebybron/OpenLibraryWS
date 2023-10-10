@@ -2,7 +2,7 @@ def main(ctx):
   if ctx.build.branch == "master" :
       return CI()
   else : 
-      return CD()
+      return void()
 
 def CI():
   return {
@@ -35,3 +35,7 @@ def CD():
           "commands": [ "cd Sources/" , "dotnet restore OpenLibraryWS_Wrapper.sln" , "dotnet build OpenLibraryWS_Wrapper.sln -c Release --no-restore" ]
         }]
   }
+
+
+  def void():
+    return {}
