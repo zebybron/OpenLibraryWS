@@ -2,7 +2,7 @@ def main(ctx):
   if ctx.build.branch == "master" :
       return CI()
   else : 
-      return void()
+      return rien()
 
 def CI():
   return {
@@ -37,5 +37,5 @@ def CD():
   }
 
 
-  def void():
+  def rien():
     return {}
