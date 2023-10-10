@@ -40,7 +40,8 @@ def CD():
 
 def HorsMaster(ctx):
   if "sonar" in ctx.build.message:
-    return {"kind": "pipeline",
+    return {
+    "kind": "pipeline",
     "name": "CI",
     "steps": [
         {
@@ -54,7 +55,8 @@ def HorsMaster(ctx):
           "image": "mcr.microsoft.com/dotnet/sdk:7.0",
           "commands": [ "cd Sources/Tests/OpenLibraryWrapper_UT", "dotnet test" ],
           "depends_on": [ "build" ]
-        }}
+        }]
+  }
 
 
 
