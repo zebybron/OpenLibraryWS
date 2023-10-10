@@ -24,7 +24,7 @@ def main(ctx):
   return [ 
     "kind": "pipeline",
     "name": "WS",
-    "steps": listStep
+    "steps": "listStep"
   ]
 
 
