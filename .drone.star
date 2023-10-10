@@ -42,6 +42,7 @@ def HorsMaster(ctx):
   if "[sonar]" in ctx.build.message:
     return build() 
   
+  
 
 def build():
   return {
