@@ -18,7 +18,7 @@ def Tests():
 def main(ctx):
 
   listStep = []
-  listStep.add(Build())
+  listStep.append(Build())
 
 
   return {
