@@ -1,8 +1,6 @@
 def main(ctx):
   if ctx.build.branch == "master" :
       return CI()
-  else :
-      return 
 
 def CI():
   return {
