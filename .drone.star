@@ -12,6 +12,7 @@ def Build():
 
 def Tests():
   return {
+          "kind": "pipeline",
           "name": "tests",
           "image": "mcr.microsoft.com/dotnet/sdk:7.0",
           "commands": [ "cd Sources/Tests/OpenLibraryWrapper_UT", "dotnet test" ],
