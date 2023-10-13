@@ -19,8 +19,8 @@ COPY ["Sources/MyLibraryEntities/MyLibraryEntities.csproj", "MyLibraryEntities/"
 COPY ["Sources/StubbedDB/StubbedDB.csproj", "StubbedDB/"]
 RUN dotnet restore "OpenLibraryWrapper/OpenLibraryWrapper.csproj"
 
-COPY ./Sources .
-WORKDIR /src/OpenLibraryWrapper
+COPY . .
+WORKDIR "/src/OpenLibraryWrapper"
 RUN dotnet buid "OpenLibraryWrapper.csproj" -c Release -o /app/build
 
 FROM build AS publish
