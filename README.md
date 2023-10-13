@@ -5,7 +5,7 @@
 This project proposes a Web Service wrapping the [OpenLibrary](https://openlibrary.org/). This is an archive of books and editions and it proposes a web api. This work here is a wrapper in order to simplify the use of this api, with less routes, and also to be interchangeable with another web service that will be issued shortly, owning its proper database of books.  
 Its purpose is mainly and only to be used by my students in order to practice a little bit _continuous integration_ and _continuous deployment_. 
 
-## Table of Contents !
+## Table of Contents
 
 [Documentation](#documentation)  
 [Getting Started](#getting-started)  
