@@ -1,28 +1,36 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+name: CI/CD Workflow
 
-name: .NET
-
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
+    
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
+        dotnet-version: 7.0.100
+    
     - name: Build
-      run: dotnet build --no-restore
+      run: |
+        dotnet restore Sources/OpenLibraryWS_Wrapper.sln
+        dotnet build Sources/OpenLibraryWS_Wrapper.sln -c Release --no-restore
+        dotnet publish Sources/OpenLibraryWrapper/OpenLibraryWrapper.csproj -c Release --no-restore -o $GITHUB_WORKSPACE/build/release
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.100
+
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: |
+        dotnet restore Sources/OpenLibraryWS_Wrapper.sln
+        dotnet test Sources/OpenLibraryWS_Wrapper.sln --no-restore
