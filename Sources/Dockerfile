@@ -20,7 +20,7 @@ COPY ["Sources/StubbedDB/StubbedDB.csproj", "StubbedDB/"]
 RUN dotnet restore "OpenLibraryWrapper/OpenLibraryWrapper.csproj"
 
 COPY ./Sources .
-RUN dotnet buid OpenLibraryWrapper/OpenLibraryWrapper.csproj -c Release -o /app/build
+RUN dotnet buid "OpenLibraryWrapper/OpenLibraryWrapper.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "OpenLibraryWrapper.csproj" -c Release -o /app/publish /p:UseAppHost=false
