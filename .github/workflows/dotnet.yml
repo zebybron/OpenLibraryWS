@@ -41,6 +41,7 @@ jobs:
         dotnet test Sources/OpenLibraryWS_Wrapper.sln --no-restore
 
   build-and-push-image:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
